@@ -74,7 +74,7 @@ func convert(format string, f io.Reader) ([]byte, error) {
 			return []byte{}, err
 		}
 	case "jpeg", "jpg":
-		err = jpeg.Encode(buf, img, nil)
+		err = jpeg.Encode(buf, img, &jpeg.Options{Quality: 100})
 		if err != nil {
 			return []byte{}, err
 		}
