@@ -38,9 +38,11 @@ func upload(w http.ResponseWriter, r *http.Request) {
 
 	case "":
 		w.Write([]byte(fmt.Sprintf("No file format given :(")))
+		return
 
 	default:
 		w.Write([]byte(fmt.Sprintf("File format %v not supported :(", format)))
+		return
 	}
 
 	// Handle 0, 1, 2+ files uploaded
@@ -109,6 +111,7 @@ func upload(w http.ResponseWriter, r *http.Request) {
 		err = sendFile(tar, "images.tar", w)
 		if err != nil {
 			w.Write([]byte(fmt.Sprintf("Unable to send back requested pictures: %v :(", err)))
+			return
 		}
 		return
 	}
