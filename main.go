@@ -30,7 +30,11 @@ func upload(w http.ResponseWriter, r *http.Request) {
 	}
 
 	formData := r.MultipartForm
-	images := formData.File["image"]
+	images, ok := formData.File["image"]
+	if !ok {
+		fmt.Println("No file called image")
+		return
+	}
 
 	format := r.FormValue("format")
 	switch format {
